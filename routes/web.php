@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('words', WordController::class);
+
+Route::get('phpinfo', function() {
+    return response()->json([
+     'stuff' => phpinfo()
+    ]);
+ });
