@@ -13,9 +13,9 @@ class WordController extends Controller
      */
     public function index()
     {
-        $data = Word::orderBy('word')->paginate(5);
+        $data = Word::orderBy('word')->paginate(10);
     
         return view('words.index',compact('data'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 }
