@@ -3,9 +3,12 @@
 namespace Database\Seeders;
 
 use Exception;
-use Illuminate\Database\Seeder;
 
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+
+use App\Models\Word;
 
 
 class WordSeeder extends Seeder
@@ -17,7 +20,7 @@ class WordSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Word::truncate();
+        Word::truncate();
 
         $fh = fopen('word_list.txt','r');
         while ($word = fgets($fh)) {
@@ -28,11 +31,18 @@ class WordSeeder extends Seeder
             $lettersSorted = implode($letters); 
 
             try {
-                \App\Models\Word::create([
+               Word::create([
                     'word' => $word,
-                    'letters_sorted' => $lettersSorted
+                    'letters_sorted' => $lettersSorted,
+                    'anagrams' => 0
                 ]);
+
+                DB::table('words')->where('letters_sorted', $lettersSorted)->update(
+                    ['anagrams' => DB::raw('(SELECT c FROM (SELECT COUNT(*) - 1 AS c FROM words w WHERE words.letters_sorted = w.letters_sorted) sub)')]
+                );
             } catch(Exception $e){
+                Log::warning($e);
+
                 Log::warning('Failed to insert ' . $word);
             }
         }

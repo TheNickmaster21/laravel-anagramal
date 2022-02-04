@@ -14,12 +14,18 @@
             <th>No</th>
             <th>Word</th>
             <th>Sorted Letters</th>
+            <th>Anagrams</th>
         </tr>
         @foreach ($data as $key => $value)
         <tr>
             <td>{{ ++$i }}</td>
             <td>{{ $value->word }}</td>
             <td>{{ $value->letters_sorted }}</td>
+            @if($value->anagrams > 0)
+            <td><a href="{{url('/anagrams/'.$value->word)}}">{{ $value->anagrams }}</a></td>
+            @else
+            <td>{{ $value->anagrams }}</td>
+            @endif
         </tr>
         @endforeach
     </table>  
