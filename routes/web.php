@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AnagramController;
 use App\Http\Controllers\WordController;
 
 /*
@@ -18,7 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('words', WordController::class);
+Route::resource('/words', WordController::class);
+
+Route::get('/anagrams/{word}', [AnagramController::class, 'show']);
 
 Route::get('phpinfo', function() {
     return response()->json([
