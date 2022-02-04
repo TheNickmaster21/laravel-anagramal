@@ -4,7 +4,7 @@
     <div class="row" style="margin-top: 5rem;">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Anagrams</h2>
+                <h2>Anagrams of {{$word}}</h2>
             </div>
         </div>
     </div>
@@ -22,4 +22,6 @@
         @endforeach
     </table>  
     {!! $data->links() !!}   
+
+    <a href="{{url('/words/')}}">Back to the word list</a>
 @endsection

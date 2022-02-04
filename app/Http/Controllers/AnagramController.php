@@ -24,7 +24,7 @@ class AnagramController extends Controller
             ->orderBy('word')
             ->paginate(10);
     
-        return view('anagrams.index',compact('data'))
+        return view('anagrams.index',compact('data', 'word'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 }

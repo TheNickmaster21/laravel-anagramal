@@ -25,6 +25,6 @@ Route::get('/anagrams/{word}', [AnagramController::class, 'show']);
 
 Route::get('phpinfo', function() {
     return response()->json([
-     'stuff' => phpinfo()
+     'info' => phpinfo()
     ]);
  });
