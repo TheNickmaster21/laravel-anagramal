@@ -1,4 +1,4 @@
-@extends('words.layout')
+@extends('anagrams.layout')
  
 @section('content')
     <div class="row" style="margin-top: 5rem;">
